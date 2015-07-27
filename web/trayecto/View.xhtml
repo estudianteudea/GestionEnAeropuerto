@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TrayectoViewDlg" widgetVar="TrayectoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTrayectoTitle}">
+            <h:form id="TrayectoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{trayectoController.selected != null}">
+                        <h:outputText value="#{bundle.ViewTrayectoLabel_idTrayecto}"/>
+                        <h:outputText value="#{trayectoController.selected.idTrayecto}" title="#{bundle.ViewTrayectoTitle_idTrayecto}"/>
+                        <h:outputText value="#{bundle.ViewTrayectoLabel_horaSalida}"/>
+                        <h:outputText value="#{trayectoController.selected.horaSalida}" title="#{bundle.ViewTrayectoTitle_horaSalida}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewTrayectoLabel_horaLlegada}"/>
+                        <h:outputText value="#{trayectoController.selected.horaLlegada}" title="#{bundle.ViewTrayectoTitle_horaLlegada}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewTrayectoLabel_origen}"/>
+                        <h:outputText value="#{trayectoController.selected.origen}" title="#{bundle.ViewTrayectoTitle_origen}"/>
+                        <h:outputText value="#{bundle.ViewTrayectoLabel_destino}"/>
+                        <h:outputText value="#{trayectoController.selected.destino}" title="#{bundle.ViewTrayectoTitle_destino}"/>
+                        <h:outputText value="#{bundle.ViewTrayectoLabel_viaje}"/>
+                        <h:outputText value="#{trayectoController.selected.viaje}" title="#{bundle.ViewTrayectoTitle_viaje}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="TrayectoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

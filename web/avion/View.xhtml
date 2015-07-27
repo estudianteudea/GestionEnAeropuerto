@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AvionViewDlg" widgetVar="AvionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewAvionTitle}">
+            <h:form id="AvionViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{avionController.selected != null}">
+                        <h:outputText value="#{bundle.ViewAvionLabel_idAvion}"/>
+                        <h:outputText value="#{avionController.selected.idAvion}" title="#{bundle.ViewAvionTitle_idAvion}"/>
+                        <h:outputText value="#{bundle.ViewAvionLabel_capacidadPasajeros}"/>
+                        <h:outputText value="#{avionController.selected.capacidadPasajeros}" title="#{bundle.ViewAvionTitle_capacidadPasajeros}"/>
+                        <h:outputText value="#{bundle.ViewAvionLabel_capacidadCarga}"/>
+                        <h:outputText value="#{avionController.selected.capacidadCarga}" title="#{bundle.ViewAvionTitle_capacidadCarga}"/>
+                        <h:outputText value="#{bundle.ViewAvionLabel_capacidadCombustible}"/>
+                        <h:outputText value="#{avionController.selected.capacidadCombustible}" title="#{bundle.ViewAvionTitle_capacidadCombustible}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="AvionViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

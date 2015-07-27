@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AvionCreateDlg" widgetVar="AvionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateAvionTitle}">
+            <h:form id="AvionCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{avionController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateAvionLabel_idAvion}" for="idAvion" />
+                        <p:inputText id="idAvion" value="#{avionController.selected.idAvion}" title="#{bundle.CreateAvionTitle_idAvion}" required="true" requiredMessage="#{bundle.CreateAvionRequiredMessage_idAvion}"/>
+                        <p:outputLabel value="#{bundle.CreateAvionLabel_capacidadPasajeros}" for="capacidadPasajeros" />
+                        <p:inputText id="capacidadPasajeros" value="#{avionController.selected.capacidadPasajeros}" title="#{bundle.CreateAvionTitle_capacidadPasajeros}" required="true" requiredMessage="#{bundle.CreateAvionRequiredMessage_capacidadPasajeros}"/>
+                        <p:outputLabel value="#{bundle.CreateAvionLabel_capacidadCarga}" for="capacidadCarga" />
+                        <p:inputText id="capacidadCarga" value="#{avionController.selected.capacidadCarga}" title="#{bundle.CreateAvionTitle_capacidadCarga}" required="true" requiredMessage="#{bundle.CreateAvionRequiredMessage_capacidadCarga}"/>
+                        <p:outputLabel value="#{bundle.CreateAvionLabel_capacidadCombustible}" for="capacidadCombustible" />
+                        <p:inputText id="capacidadCombustible" value="#{avionController.selected.capacidadCombustible}" title="#{bundle.CreateAvionTitle_capacidadCombustible}" required="true" requiredMessage="#{bundle.CreateAvionRequiredMessage_capacidadCombustible}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{avionController.create}" value="#{bundle.Save}" update="display,:AvionListForm:datalist,:growl" oncomplete="handleSubmit(args,'AvionCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AvionCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

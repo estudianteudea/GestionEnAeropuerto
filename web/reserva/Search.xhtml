@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition>
+
+        <p:dialog id="ReservaSearchDlg" widgetVar="ReservaSearchDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.SearchReservaTitle}">
+            <h:form id="ReservaSearchForm">
+                <h:panelGroup id="display">
+                    <h3 style="margin-top:0">Ingrese ID</h3>
+                    <p:panelGrid columns="1" >                        
+                        <p:inputText id="idUsuario" value="#{reservaController.itemFound}" placeholder="ID de Usuario" required="true"/>                        
+                    </p:panelGrid>
+                    <p:commandButton  value="#{bundle.Search}" ajax="false" action="List" icon="ui-icon-search"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('ReservaSearchDialog').hide()" icon="ui-icon-cancel"/>
+                </h:panelGroup>
+            </h:form>
+            
+        </p:dialog>        
+    </ui:composition>
+</html>

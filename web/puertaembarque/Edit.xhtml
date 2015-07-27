@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PuertaembarqueEditDlg" widgetVar="PuertaembarqueEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPuertaembarqueTitle}">
+            <h:form id="PuertaembarqueEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{puertaembarqueController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPuertaembarqueLabel_idPuertaEmbarque}" for="idPuertaEmbarque" />
+                        <p:inputText id="idPuertaEmbarque" value="#{puertaembarqueController.selected.idPuertaEmbarque}" title="#{bundle.EditPuertaembarqueTitle_idPuertaEmbarque}" required="true" requiredMessage="#{bundle.EditPuertaembarqueRequiredMessage_idPuertaEmbarque}"/>
+                        <p:outputLabel value="#{bundle.EditPuertaembarqueLabel_nombrePuertaEmbarque}" for="nombrePuertaEmbarque" />
+                        <p:inputText id="nombrePuertaEmbarque" value="#{puertaembarqueController.selected.nombrePuertaEmbarque}" title="#{bundle.EditPuertaembarqueTitle_nombrePuertaEmbarque}" required="true" requiredMessage="#{bundle.EditPuertaembarqueRequiredMessage_nombrePuertaEmbarque}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{puertaembarqueController.update}" value="#{bundle.Save}" update="display,:PuertaembarqueListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PuertaembarqueEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PuertaembarqueEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EquipajeEditDlg" widgetVar="EquipajeEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditEquipajeTitle}">
+            <h:form id="EquipajeEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{equipajeController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditEquipajeLabel_idEquipaje}" for="idEquipaje" />
+                        <p:inputText id="idEquipaje" value="#{equipajeController.selected.idEquipaje}" title="#{bundle.EditEquipajeTitle_idEquipaje}" required="true" requiredMessage="#{bundle.EditEquipajeRequiredMessage_idEquipaje}"/>
+                        <p:outputLabel value="#{bundle.EditEquipajeLabel_pesoEquipaje}" for="pesoEquipaje" />
+                        <p:inputText id="pesoEquipaje" value="#{equipajeController.selected.pesoEquipaje}" title="#{bundle.EditEquipajeTitle_pesoEquipaje}" required="true" requiredMessage="#{bundle.EditEquipajeRequiredMessage_pesoEquipaje}"/>
+                        <p:outputLabel value="#{bundle.EditEquipajeLabel_fechaRegistro}" for="fechaRegistro" />
+                        <p:calendar id="fechaRegistro" pattern="MM/dd/yyyy HH:mm:ss" value="#{equipajeController.selected.fechaRegistro}" title="#{bundle.EditEquipajeTitle_fechaRegistro}" required="true" requiredMessage="#{bundle.EditEquipajeRequiredMessage_fechaRegistro}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditEquipajeLabel_reserva}" for="reserva" />
+                        <p:selectOneMenu id="reserva" value="#{equipajeController.selected.reserva}" required="true" requiredMessage="#{bundle.EditEquipajeRequiredMessage_reserva}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{reservaController.itemsAvailableSelectOne}"
+                                           var="reservaItem"
+                                           itemValue="#{reservaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditEquipajeLabel_ubicacion}" for="ubicacion" />
+                        <p:selectOneMenu id="ubicacion" value="#{equipajeController.selected.ubicacion}" required="true" requiredMessage="#{bundle.EditEquipajeRequiredMessage_ubicacion}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{ubicacionController.itemsAvailableSelectOne}"
+                                           var="ubicacionItem"
+                                           itemValue="#{ubicacionItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditEquipajeLabel_estado}" for="estado" />
+                        <p:selectOneMenu id="estado" value="#{equipajeController.selected.estado}" required="true" requiredMessage="#{bundle.EditEquipajeRequiredMessage_estado}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{estadoController.itemsAvailableSelectOne}"
+                                           var="estadoItem"
+                                           itemValue="#{estadoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{equipajeController.update}" value="#{bundle.Save}" update="display,:EquipajeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EquipajeEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EquipajeEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EquipajeCreateDlg" widgetVar="EquipajeCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateEquipajeTitle}">
+            <h:form id="EquipajeCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{equipajeController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateEquipajeLabel_idEquipaje}" for="idEquipaje" />
+                        <p:inputText id="idEquipaje" value="#{equipajeController.selected.idEquipaje}" title="#{bundle.CreateEquipajeTitle_idEquipaje}" required="true" requiredMessage="#{bundle.CreateEquipajeRequiredMessage_idEquipaje}"/>
+                        <p:outputLabel value="#{bundle.CreateEquipajeLabel_pesoEquipaje}" for="pesoEquipaje" />
+                        <p:inputText id="pesoEquipaje" value="#{equipajeController.selected.pesoEquipaje}" title="#{bundle.CreateEquipajeTitle_pesoEquipaje}" required="true" requiredMessage="#{bundle.CreateEquipajeRequiredMessage_pesoEquipaje}"/>
+                        <p:outputLabel value="#{bundle.CreateEquipajeLabel_fechaRegistro}" for="fechaRegistro" />
+                        <p:calendar id="fechaRegistro" pattern="MM/dd/yyyy HH:mm:ss" value="#{equipajeController.selected.fechaRegistro}" title="#{bundle.EditEquipajeTitle_fechaRegistro}" required="true" requiredMessage="#{bundle.EditEquipajeRequiredMessage_fechaRegistro}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateEquipajeLabel_reserva}" for="reserva" />
+                        <p:selectOneMenu id="reserva" value="#{equipajeController.selected.reserva}" required="true" requiredMessage="#{bundle.EditEquipajeRequiredMessage_reserva}">
+                            <f:selectItems value="#{reservaController.itemsAvailableSelectOne}"
+                                           var="reservaItem"
+                                           itemValue="#{reservaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateEquipajeLabel_ubicacion}" for="ubicacion" />
+                        <p:selectOneMenu id="ubicacion" value="#{equipajeController.selected.ubicacion}" required="true" requiredMessage="#{bundle.EditEquipajeRequiredMessage_ubicacion}">
+                            <f:selectItems value="#{ubicacionController.itemsAvailableSelectOne}"
+                                           var="ubicacionItem"
+                                           itemValue="#{ubicacionItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateEquipajeLabel_estado}" for="estado" />
+                        <p:selectOneMenu id="estado" value="#{equipajeController.selected.estado}" required="true" requiredMessage="#{bundle.EditEquipajeRequiredMessage_estado}">
+                            <f:selectItems value="#{estadoController.itemsAvailableSelectOne}"
+                                           var="estadoItem"
+                                           itemValue="#{estadoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{equipajeController.create}" value="#{bundle.Save}" update="display,:EquipajeListForm:datalist,:growl" oncomplete="handleSubmit(args,'EquipajeCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EquipajeCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

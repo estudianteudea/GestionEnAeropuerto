@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EmbarqueCreateDlg" widgetVar="EmbarqueCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateEmbarqueTitle}">
+            <h:form id="EmbarqueCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{embarqueController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateEmbarqueLabel_horaCierre}" for="horaCierre" />
+                        <p:calendar id="horaCierre" pattern="MM/dd/yyyy HH:mm:ss" value="#{embarqueController.selected.horaCierre}" title="#{bundle.EditEmbarqueTitle_horaCierre}" required="true" requiredMessage="#{bundle.EditEmbarqueRequiredMessage_horaCierre}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateEmbarqueLabel_puertaembarque}" for="puertaembarque" />
+                        <p:selectOneMenu id="puertaembarque" value="#{embarqueController.selected.puertaembarque}" required="true" requiredMessage="#{bundle.EditEmbarqueRequiredMessage_puertaembarque}">
+                            <f:selectItems value="#{puertaembarqueController.itemsAvailableSelectOne}"
+                                           var="puertaembarqueItem"
+                                           itemValue="#{puertaembarqueItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateEmbarqueLabel_viaje1}" for="viaje1" />
+                        <p:selectOneMenu id="viaje1" value="#{embarqueController.selected.viaje1}" required="true" requiredMessage="#{bundle.EditEmbarqueRequiredMessage_viaje1}">
+                            <f:selectItems value="#{viajeController.itemsAvailableSelectOne}"
+                                           var="viaje1Item"
+                                           itemValue="#{viaje1Item}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{embarqueController.create}" value="#{bundle.Save}" update="display,:EmbarqueListForm:datalist,:growl" oncomplete="handleSubmit(args,'EmbarqueCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EmbarqueCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

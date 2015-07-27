@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListViajeTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="ChooseListForm">
+                <p:panel header="#{bundle.ListViajeTitle}">
+                    <p:dataTable id="datalist" value="#{viajeController.findTrip}" var="findTrip"
+                                 selectionMode="single" selection="#{viajeController.selected}"
+                                 paginator="true"
+                                 rowKey="#{findTrip.idViaje}" 
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="asignarButton"/>
+                        <p:ajax event="rowUnselect" update="asignarButton"/>
+
+                       <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListViajeTitle_idViaje}"/>
+                            </f:facet>
+                           <h:outputText value="#{findTrip.idViaje}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListViajeTitle_origen}"/>
+                            </f:facet>
+                            <h:outputText value="#{findTrip.origen}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListViajeTitle_destino}"/>
+                            </f:facet>
+                            <h:outputText value="#{findTrip.destino}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="asignarButton" icon="ui-icon-plus" value="#{bundle.Asignar}" 
+                                             update="display,:ReservaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ChooseListForm');"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            
+        </ui:define>
+    </ui:composition>
+
+</html>
+

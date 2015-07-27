@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ViajeEditDlg" widgetVar="ViajeEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditViajeTitle}">
+            <h:form id="ViajeEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{viajeController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditViajeLabel_idViaje}" for="idViaje" />
+                        <p:inputText id="idViaje" value="#{viajeController.selected.idViaje}" title="#{bundle.EditViajeTitle_idViaje}" required="true" requiredMessage="#{bundle.EditViajeRequiredMessage_idViaje}"/>
+                        <p:outputLabel value="#{bundle.EditViajeLabel_origen}" for="origen" />
+                        <p:selectOneMenu id="origen" value="#{viajeController.selected.origen}" required="true" requiredMessage="#{bundle.EditViajeRequiredMessage_origen}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{aeropuertoController.itemsAvailableSelectOne}"
+                                           var="origenItem"
+                                           itemValue="#{origenItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditViajeLabel_destino}" for="destino" />
+                        <p:selectOneMenu id="destino" value="#{viajeController.selected.destino}" required="true" requiredMessage="#{bundle.EditViajeRequiredMessage_destino}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{aeropuertoController.itemsAvailableSelectOne}"
+                                           var="destinoItem"
+                                           itemValue="#{destinoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{viajeController.update}" value="#{bundle.Save}" update="display,:ViajeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ViajeEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ViajeEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

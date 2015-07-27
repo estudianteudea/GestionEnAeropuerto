@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EquipajeViewDlg" widgetVar="EquipajeViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewEquipajeTitle}">
+            <h:form id="EquipajeViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{equipajeController.selected != null}">
+                        <h:outputText value="#{bundle.ViewEquipajeLabel_idEquipaje}"/>
+                        <h:outputText value="#{equipajeController.selected.idEquipaje}" title="#{bundle.ViewEquipajeTitle_idEquipaje}"/>
+                        <h:outputText value="#{bundle.ViewEquipajeLabel_pesoEquipaje}"/>
+                        <h:outputText value="#{equipajeController.selected.pesoEquipaje}" title="#{bundle.ViewEquipajeTitle_pesoEquipaje}"/>
+                        <h:outputText value="#{bundle.ViewEquipajeLabel_fechaRegistro}"/>
+                        <h:outputText value="#{equipajeController.selected.fechaRegistro}" title="#{bundle.ViewEquipajeTitle_fechaRegistro}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewEquipajeLabel_reserva}"/>
+                        <h:outputText value="#{equipajeController.selected.reserva}" title="#{bundle.ViewEquipajeTitle_reserva}"/>
+                        <h:outputText value="#{bundle.ViewEquipajeLabel_ubicacion}"/>
+                        <h:outputText value="#{equipajeController.selected.ubicacion}" title="#{bundle.ViewEquipajeTitle_ubicacion}"/>
+                        <h:outputText value="#{bundle.ViewEquipajeLabel_estado}"/>
+                        <h:outputText value="#{equipajeController.selected.estado}" title="#{bundle.ViewEquipajeTitle_estado}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="EquipajeViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

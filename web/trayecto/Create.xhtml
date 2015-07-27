@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TrayectoCreateDlg" widgetVar="TrayectoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTrayectoTitle}">
+            <h:form id="TrayectoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{trayectoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTrayectoLabel_idTrayecto}" for="idTrayecto" />
+                        <p:inputText id="idTrayecto" value="#{trayectoController.selected.idTrayecto}" title="#{bundle.CreateTrayectoTitle_idTrayecto}" required="true" requiredMessage="#{bundle.CreateTrayectoRequiredMessage_idTrayecto}"/>
+                        <p:outputLabel value="#{bundle.CreateTrayectoLabel_horaSalida}" for="horaSalida" />
+                        <p:calendar id="horaSalida" pattern="MM/dd/yyyy HH:mm:ss" value="#{trayectoController.selected.horaSalida}" title="#{bundle.EditTrayectoTitle_horaSalida}" required="true" requiredMessage="#{bundle.EditTrayectoRequiredMessage_horaSalida}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateTrayectoLabel_horaLlegada}" for="horaLlegada" />
+                        <p:calendar id="horaLlegada" pattern="MM/dd/yyyy HH:mm:ss" value="#{trayectoController.selected.horaLlegada}" title="#{bundle.EditTrayectoTitle_horaLlegada}" required="true" requiredMessage="#{bundle.EditTrayectoRequiredMessage_horaLlegada}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateTrayectoLabel_origen}" for="origen" />
+                        <p:selectOneMenu id="origen" value="#{trayectoController.selected.origen}" required="true" requiredMessage="#{bundle.EditTrayectoRequiredMessage_origen}">
+                            <f:selectItems value="#{aeropuertoController.itemsAvailableSelectOne}"
+                                           var="origenItem"
+                                           itemValue="#{origenItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateTrayectoLabel_destino}" for="destino" />
+                        <p:selectOneMenu id="destino" value="#{trayectoController.selected.destino}" required="true" requiredMessage="#{bundle.EditTrayectoRequiredMessage_destino}">
+                            <f:selectItems value="#{aeropuertoController.itemsAvailableSelectOne}"
+                                           var="destinoItem"
+                                           itemValue="#{destinoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateTrayectoLabel_viaje}" for="viaje" />
+                        <p:selectOneMenu id="viaje" value="#{trayectoController.selected.viaje}" required="true" requiredMessage="#{bundle.EditTrayectoRequiredMessage_viaje}">
+                            <f:selectItems value="#{viajeController.itemsAvailableSelectOne}"
+                                           var="viajeItem"
+                                           itemValue="#{viajeItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{trayectoController.create}" value="#{bundle.Save}" update="display,:TrayectoListForm:datalist,:growl" oncomplete="handleSubmit(args,'TrayectoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TrayectoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

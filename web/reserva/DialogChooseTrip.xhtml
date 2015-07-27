@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition>
+
+        <p:dialog id="ChooseTripDia" widgetVar="ChooseTripDialog" modal="true"  showEffect="fade" onShow="oi.update()" appendTo="@(body)" header="#{bundle.SearchReservaTitle}">
+            <h:form id="ChooseTripForm">
+                <p:panel header="#{bundle.ListViajeTitle}">
+                    <p:dataTable id="datalist" value="#{viajeController.findTrip}" var="findTrip"
+                                 selectionMode="single" selection="#{viajeController.selected}"
+                                 paginator="true"
+                                 rowKey="#{findTrip.idViaje}" 
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+                       <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListViajeTitle_idViaje}"/>
+                            </f:facet>
+                           <h:outputText value="#{findTrip.idViaje}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListViajeTitle_origen}"/>
+                            </f:facet>
+                            <h:outputText value="#{findTrip.origen}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListViajeTitle_destino}"/>
+                            </f:facet>
+                            <h:outputText value="#{findTrip.destino}"/>
+                        </p:column>
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListViajeTitle_destino}"/>
+                            </f:facet>
+                            <p:commandButton icon="ui-icon-plus" />
+                        </p:column>                       
+                        
+                        
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+            
+        </p:dialog>        
+    </ui:composition>
+</html>

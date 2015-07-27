@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EmbarqueViewDlg" widgetVar="EmbarqueViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewEmbarqueTitle}">
+            <h:form id="EmbarqueViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{embarqueController.selected != null}">
+                        <h:outputText value="#{bundle.ViewEmbarqueLabel_horaCierre}"/>
+                        <h:outputText value="#{embarqueController.selected.horaCierre}" title="#{bundle.ViewEmbarqueTitle_horaCierre}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewEmbarqueLabel_puertaembarque}"/>
+                        <h:outputText value="#{embarqueController.selected.puertaembarque}" title="#{bundle.ViewEmbarqueTitle_puertaembarque}"/>
+                        <h:outputText value="#{bundle.ViewEmbarqueLabel_viaje1}"/>
+                        <h:outputText value="#{embarqueController.selected.viaje1}" title="#{bundle.ViewEmbarqueTitle_viaje1}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="EmbarqueViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

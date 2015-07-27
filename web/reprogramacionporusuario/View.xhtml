@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ReprogramacionporusuarioViewDlg" widgetVar="ReprogramacionporusuarioViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewReprogramacionporusuarioTitle}">
+            <h:form id="ReprogramacionporusuarioViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{reprogramacionporusuarioController.selected != null}">
+                        <h:outputText value="#{bundle.ViewReprogramacionporusuarioLabel_idReprogramacion}"/>
+                        <h:outputText value="#{reprogramacionporusuarioController.selected.idReprogramacion}" title="#{bundle.ViewReprogramacionporusuarioTitle_idReprogramacion}"/>
+                        <h:outputText value="#{bundle.ViewReprogramacionporusuarioLabel_fechaReprogramacion}"/>
+                        <h:outputText value="#{reprogramacionporusuarioController.selected.fechaReprogramacion}" title="#{bundle.ViewReprogramacionporusuarioTitle_fechaReprogramacion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewReprogramacionporusuarioLabel_reserva}"/>
+                        <h:outputText value="#{reprogramacionporusuarioController.selected.reserva}" title="#{bundle.ViewReprogramacionporusuarioTitle_reserva}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ReprogramacionporusuarioViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

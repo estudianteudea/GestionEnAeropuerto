@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AvionEditDlg" widgetVar="AvionEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditAvionTitle}">
+            <h:form id="AvionEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{avionController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditAvionLabel_idAvion}" for="idAvion" />
+                        <p:inputText id="idAvion" value="#{avionController.selected.idAvion}" title="#{bundle.EditAvionTitle_idAvion}" required="true" requiredMessage="#{bundle.EditAvionRequiredMessage_idAvion}"/>
+                        <p:outputLabel value="#{bundle.EditAvionLabel_capacidadPasajeros}" for="capacidadPasajeros" />
+                        <p:inputText id="capacidadPasajeros" value="#{avionController.selected.capacidadPasajeros}" title="#{bundle.EditAvionTitle_capacidadPasajeros}" required="true" requiredMessage="#{bundle.EditAvionRequiredMessage_capacidadPasajeros}"/>
+                        <p:outputLabel value="#{bundle.EditAvionLabel_capacidadCarga}" for="capacidadCarga" />
+                        <p:inputText id="capacidadCarga" value="#{avionController.selected.capacidadCarga}" title="#{bundle.EditAvionTitle_capacidadCarga}" required="true" requiredMessage="#{bundle.EditAvionRequiredMessage_capacidadCarga}"/>
+                        <p:outputLabel value="#{bundle.EditAvionLabel_capacidadCombustible}" for="capacidadCombustible" />
+                        <p:inputText id="capacidadCombustible" value="#{avionController.selected.capacidadCombustible}" title="#{bundle.EditAvionTitle_capacidadCombustible}" required="true" requiredMessage="#{bundle.EditAvionRequiredMessage_capacidadCombustible}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{avionController.update}" value="#{bundle.Save}" update="display,:AvionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AvionEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AvionEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
