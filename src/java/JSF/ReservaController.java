@@ -22,6 +22,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import model.Usuario;
+import model.Viaje;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
@@ -41,6 +42,7 @@ public class ReservaController implements Serializable {
     private boolean confirmarVuelo;    
     private static boolean btnReasignar = true;
     private static boolean btnConfirmarV = true;
+    private static int IDRESERVA;
 
     public boolean isBtnReasignar() {
         return btnReasignar;
@@ -256,6 +258,8 @@ public class ReservaController implements Serializable {
        
         
         int reserva = ((Reserva) event.getObject()).getIdReserva(); 
+        IDRESERVA = ((Reserva) event.getObject()).getIdReserva(); 
+        
         Date date = new java.util.Date();
         Timestamp timeStamp = new Timestamp(date.getTime());         
         boolean bandera=getFacade().confirmarViaje(Integer.toString(reserva),timeStamp);
@@ -281,5 +285,16 @@ public class ReservaController implements Serializable {
     public void dialogFindTrip(){
         RequestContext.getCurrentInstance().openDialog("DialogChooseTrip");
     }
+    
+    public void actualizarVuelo(Viaje idViaje){
+        int idReserva = IDRESERVA;
+        Reserva r = getFacade().find(idReserva);
+        //r.setViaje(idViaje);
+        r.setConfirmacion(true);            
+        getFacade().edit(r);
+        
+    }
+    
+    
 
 }

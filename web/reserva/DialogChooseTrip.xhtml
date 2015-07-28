@@ -38,9 +38,9 @@
                         
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListViajeTitle_destino}"/>
+                                <h:outputText value="#{bundle.Reasignar}"/>
                             </f:facet>
-                            <p:commandButton icon="ui-icon-plus" />
+                            <p:commandButton icon="ui-icon-plus" ajax="false" action="List" actionListener="#{reservaController.actualizarVuelo(viajeController.selected)}" />
                         </p:column>                       
                         
                         

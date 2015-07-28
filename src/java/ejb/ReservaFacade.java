@@ -18,6 +18,7 @@ import javax.persistence.criteria.Predicate;
 import model.Embarque;
 import model.Reserva;
 import model.Usuario;
+import model.Viaje;
 
 /**
  *
@@ -63,6 +64,12 @@ public class ReservaFacade extends AbstractFacade<Reserva> {
         //cq.where(cb.and(criteriaList.toArray(new Predicate[0])));
         q = getEntityManager().createQuery(cq);
         return q.getResultList();
+    }
+    
+    public void actualizarViaje(int idReserva,Viaje idViaje){
+            Reserva r = find(idReserva);
+            r.setViaje(idViaje);                      
+           // edit(r);
     }
     
     
