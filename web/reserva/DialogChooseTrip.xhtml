@@ -10,7 +10,7 @@
         <p:dialog id="ChooseTripDia" widgetVar="ChooseTripDialog" modal="true"  showEffect="fade" onShow="oi.update()" appendTo="@(body)" header="#{bundle.SearchReservaTitle}">
             <h:form id="ChooseTripForm">
                 <p:panel header="#{bundle.ListViajeTitle}">
-                    <p:dataTable id="datalist" value="#{viajeController.findTrip}" var="findTrip"
+                    <p:dataTable id="datalist2" value="#{viajeController.findTrip}" var="findTrip"
                                  selectionMode="single" selection="#{viajeController.selected}"
                                  paginator="true"
                                  rowKey="#{findTrip.idViaje}" 
@@ -27,13 +27,13 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListViajeTitle_origen}"/>
                             </f:facet>
-                            <h:outputText value="#{findTrip.origen}"/>
+                            <h:outputText value="#{findTrip.origen.ciudad.nombreCiudad}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListViajeTitle_destino}"/>
                             </f:facet>
-                            <h:outputText value="#{findTrip.destino}"/>
+                            <h:outputText value="#{findTrip.destino.ciudad.nombreCiudad}"/>
                         </p:column>
                         
                         <p:column>

@@ -24,8 +24,8 @@
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
 
-                        <p:ajax event="rowSelect"   update="searchButton reasignarButton confirmarButton"/>
-                        <p:ajax event="rowUnselect" update="searchButton reasignarButton confirmarButton"/>
+                        <p:ajax event="rowSelect" listener="#{reservaController.onRowSelect}"   update="searchButton reasignarButton confirmarButton"/>
+                        <p:ajax event="rowUnselect" listener="#{reservaController.onRowUnselect}" update="searchButton reasignarButton confirmarButton"/>
 
                         <p:column>
                             <f:facet name="header">
@@ -59,7 +59,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListReservaTitle_usuario}"/>
                             </f:facet>
-                            <h:outputText value="#{item.usuario}"/>
+                            <h:outputText value="#{item.usuario.nombreUsuario} #{item.usuario.apellidoUsurio}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -71,13 +71,13 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListReservaTitle_puertaEmbarque}"/>
                             </f:facet>
-                            <h:outputText value="#{item.puertaEmbarque}"/>
+                            <h:outputText value="#{item.puertaEmbarque.nombrePuertaEmbarque}"/>
                         </p:column>
                        <f:facet name="footer">
                             <p:commandButton id="searchButton" icon="ui-icon-search" value="#{bundle.Search}" update=":ReservaSearchForm" oncomplete="PF('ReservaSearchDialog').show()" />
-                            <p:commandButton id="reasignarButton" icon="ui-icon-search"  value="#{bundle.Reasignar}" action="List" actionListener="#{viajeController.setViaje(reservaController.selected.viaje)}" 
+                            <p:commandButton id="reasignarButton" disabled="#{reservaController.btnReasignar}" icon="ui-icon-search"  value="#{bundle.Reasignar}"  actionListener="#{viajeController.setViaje(reservaController.selected.viaje)}" 
                                              update=":ChooseTripDia" oncomplete="PF('ChooseTripDialog').show()" />
-                            <p:commandButton id="confirmarButton" icon="ui-icon-search" value="#{bundle.Confirmar}" 
+                            <p:commandButton id="confirmarButton" disabled="#{reservaController.btnConfirmarV}" icon="ui-icon-search" value="#{bundle.Confirmar}" 
                                              update=":ReservarListForm" actionListener="#{reservaController.setConfirmarVuelo(reservaController.selected.idReserva)}"/>
                             
                         </f:facet>

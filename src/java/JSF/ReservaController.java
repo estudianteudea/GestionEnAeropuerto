@@ -22,6 +22,9 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import model.Usuario;
+import org.primefaces.context.RequestContext;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.event.UnselectEvent;
 
 @ManagedBean(name = "reservaController")
 @SessionScoped
@@ -33,7 +36,29 @@ public class ReservaController implements Serializable {
     private Reserva selected;
     private Object item = null;
     private Object findObject = null;
-    private boolean confirmarVuelo;
+    private boolean confirmarVuelo;    
+    private static boolean btnReasignar = true;
+    private static boolean btnConfirmarV = true;
+
+    public boolean isBtnReasignar() {
+        return btnReasignar;
+    }
+
+    public void setBtnReasignar(boolean btnReasignar) {
+        this.btnReasignar = btnReasignar;
+    }
+    
+    public boolean isBtnConfirmarV() {
+        return btnConfirmarV;
+    }
+
+    public void setBtnConfirmarV(boolean btnReasignar) {
+        this.btnConfirmarV = btnReasignar;
+    }
+
+    
+    
+    
 
     public ReservaController() {
     }
@@ -101,6 +126,13 @@ public class ReservaController implements Serializable {
         Date date = new java.util.Date();
         Timestamp timeStamp = new Timestamp(date.getTime());
         confirmarVuelo = getFacade().confirmarViaje(reserva, timeStamp); 
+        if(confirmarVuelo){
+            int idReserva = Integer.parseInt(reserva);
+            Reserva r = getFacade().find(idReserva);
+            r.setConfirmacion(Boolean.TRUE);
+            r.setFechaConfirmacion(timeStamp);            
+            getFacade().edit(r);
+        }
         
     }
     
@@ -190,6 +222,37 @@ public class ReservaController implements Serializable {
             }
         }
 
+    }
+    
+    
+    public void onRowSelect(SelectEvent event) {
+       
+        
+        int reserva = ((Reserva) event.getObject()).getIdReserva(); 
+        Date date = new java.util.Date();
+        Timestamp timeStamp = new Timestamp(date.getTime());         
+        boolean bandera=getFacade().confirmarViaje(Integer.toString(reserva),timeStamp);
+        System.out.println(bandera);
+        if(!bandera){
+            ReservaController.btnReasignar=true; // se desactiva
+            ReservaController.btnConfirmarV=false; // se desactiva
+            
+        }else{
+            
+            ReservaController.btnReasignar=false; // se desactiva
+            ReservaController.btnConfirmarV=true; // se desactiva
+            
+        }
+        
+    }
+ 
+    public void onRowUnselect(UnselectEvent event) {
+        ((Reserva) event.getObject()).getUsuario();
+        
+      
+    }
+    public void dialogFindTrip(){
+        RequestContext.getCurrentInstance().openDialog("DialogChooseTrip");
     }
 
 }

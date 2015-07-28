@@ -77,7 +77,7 @@ public class ReservaFacade extends AbstractFacade<Reserva> {
         
         List<Predicate> criteriaList = new ArrayList<>();
         
-       Predicate predicado1 = cb.equal(reserve.get("idReserva"), idReserva);
+        Predicate predicado1 = cb.equal(reserve.get("idReserva"), idReserva);
         criteriaList.add(predicado1);
         Predicate predicado2 = cb.equal(reserve.get("puertaEmbarque").get("idPuertaEmbarque"), embarque.get("puertaembarque").get("idPuertaEmbarque"));
         criteriaList.add(predicado2);
@@ -90,17 +90,19 @@ public class ReservaFacade extends AbstractFacade<Reserva> {
         javax.persistence.Query q = getEntityManager().createQuery(cq);
         Embarque embarqueComparar = (Embarque) q.getSingleResult();
         
+        
         long t = hora.getTime();
         Date horaComparar = new Date(t - 30*60*1000);
         
         Date horaReserva = embarqueComparar.getHoraCierre();
-        
+        System.out.println("horaReserva: "+horaReserva);
         if(!horaComparar.before(horaReserva)){
             
-            Reserva r = find(idReserva);
+            /*Reserva r = find(idReserva);
             r.setConfirmacion(Boolean.FALSE);
             r.setFechaConfirmacion(hora);            
-            edit(r);
+            edit(r);*/
+            return true;
             
         }
         

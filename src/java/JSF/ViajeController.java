@@ -82,14 +82,14 @@ public class ViajeController implements Serializable {
         return viaje;
     }
 
-    public void setViaje(String viaje) {
-        this.viaje = viaje;
-        idViaje = Integer.parseInt(viaje);
+    public void setViaje(Viaje viaje) {
+        this.viaje = Integer.toString(viaje.getIdViaje());        
+        idViaje = Integer.parseInt(this.viaje);
     }
 
     public Object getFindTrip() { 
         
-        idViaje=10001;
+        
         if (idViaje != 0) {
             findTrip = getFacade().find(idViaje);
             Viaje viaje = (Viaje) findTrip;
