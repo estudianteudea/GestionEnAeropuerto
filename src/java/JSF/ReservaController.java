@@ -36,6 +36,8 @@ public class ReservaController implements Serializable {
     private Reserva selected;
     private Object item = null;
     private Object findObject = null;
+    private String findReserva = null;
+    private Object findReservaObject = null;
     private boolean confirmarVuelo;    
     private static boolean btnReasignar = true;
     private static boolean btnConfirmarV = true;
@@ -55,10 +57,6 @@ public class ReservaController implements Serializable {
     public void setBtnConfirmarV(boolean btnReasignar) {
         this.btnConfirmarV = btnReasignar;
     }
-
-    
-    
-    
 
     public ReservaController() {
     }
@@ -106,6 +104,35 @@ public class ReservaController implements Serializable {
         }
     }
 
+    //Metodo para retornar una reserva en especifico
+    public Object getFindReserva() {
+        if(findReserva != null){            
+            int id = (Integer)Integer.parseInt(findReserva);
+            findReservaObject = getFacade().find(id);
+        }        
+        return findReservaObject;
+    }
+
+    //Metodo para indicar el ID de una reserva que sera buscada
+    public void setFindReserva(String findReserva) {
+        this.findReserva = findReserva;
+    }
+
+    //Metodo para averiguar si una reserva existe
+    public void checkReserva(){
+        int id = (Integer)Integer.parseInt(findReserva);
+        findReservaObject = getFacade().find(id);
+        RequestContext context = RequestContext.getCurrentInstance();
+        Reserva reserva = (Reserva)findReservaObject;
+        if(reserva.getConfirmacion() == false){
+            context.openDialog("AlertDialog");
+            //execute("PF('AlertDialog').show()");         
+        }
+        else{
+            context.execute("List");
+        }
+    }
+    
     public Object getItem(Object id) {
         item = getFacade().find(id);
         return item;
